@@ -12,8 +12,15 @@ func StartServer() {
 	r := engine
 
 	r.POST(common.RequestApi, func(context *gin.Context) {
-		context.BindJSON(request.Message{})
-		fmt.Println(request.Message{})
+		r := request.Message{}
+
+		err := context.BindJSON(&r)
+		if err != nil {
+			fmt.Println(err)
+			fmt.Println("json parsing error")
+			return
+		}
+		fmt.Println(r)
 	})
 
 	r.Run(":8081")
