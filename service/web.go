@@ -9,19 +9,17 @@ import (
 
 func StartServer() {
 	engine := gin.Default()
-	r := engine
+	server := engine
 
-	r.POST(common.RequestApi, func(context *gin.Context) {
-		r := request.Message{}
+	server.POST(common.RequestApi, func(context *gin.Context) {
+		message := request.Message{}
 
-		err := context.BindJSON(&r)
+		err := context.BindJSON(&message)
 		if err != nil {
 			fmt.Println(err)
-			fmt.Println("json parsing error")
 			return
 		}
-		fmt.Println(r)
 	})
 
-	r.Run(":8081")
+	server.Run(":8081")
 }
