@@ -13,7 +13,7 @@ func StartServer() {
 
 	server.POST(common.RequestApi, func(context *gin.Context) {
 		message := request.Message{}
-
+		getOrder(message)
 		err := context.BindJSON(&message)
 		if err != nil {
 			fmt.Println(err)
